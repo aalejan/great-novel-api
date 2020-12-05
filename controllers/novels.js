@@ -17,7 +17,7 @@ const getNovelById = async(req, res) => {
         where: {id},
         include: [
             {model: models.Authors},
-            {model: models.Genres}
+            {model: models.Genres},
         ]
     })
     return novel

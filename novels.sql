@@ -13,7 +13,7 @@ CREATE TABLE authors(
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
     PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE novels(
     id INT auto_increment,
@@ -24,7 +24,7 @@ CREATE TABLE novels(
     deletedAt DATETIME,
     PRIMARY KEY(id),
     FOREIGN KEY(authorId) REFERENCES authors(id)
-)
+);
 
 CREATE TABLE genres(
     id INT auto_increment,
@@ -33,19 +33,19 @@ CREATE TABLE genres(
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
     PRIMARY KEY(id)
-)
+);
 
-CREATE TABLE novels_genres_link(
-    novelsId INT,
-    genresId INT,
+CREATE TABLE novelsGenres(
+    novelId INT,
+    genreId INT,
     name VARCHAR(255),
     createdAt DATETIME DEFAULT NOW(),
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
-    PRIMARY KEY(novelsID, genresId)
-    FOREIGN KEY(novelsId) REFERENCES novels(id),
-    FOREIGN KEY(genresId) REFERENCES genres(id)
-)
+    PRIMARY KEY(novelId, genreId),
+    FOREIGN KEY(novelId) REFERENCES novels(id),
+    FOREIGN KEY(genreId) REFERENCES genres(id)
+);
 
 INSERT INTO authors(name) VALUES ('Bram Stoker');
 INSERT INTO authors(name) VALUES ('Oscar Wilde');
