@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
-const{getAllAuthors, getAuthorById} = require('./controllers/authors')
-const{}
+const {getAllNovels, getNovelById} = require('./controllers/novels')
+const {getAllGenres, getGenreById} = require('./controllers/genres')
+const {getAllAuthors, getAuthorById} = require('./controllers/authors')
 
 app.get('/authors', getAllAuthors)
 
