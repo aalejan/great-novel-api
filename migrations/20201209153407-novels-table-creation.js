@@ -8,9 +8,20 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.createTable('genres', {
+    return queryInterface.createTable('novels', {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-      name: { type: Sequelize.STRING },
+      title: { type: Sequelize.STRING },
+      authorId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'authors',
+            schema: 'schema'
+          },
+          key: 'id'
+        },
+        allowNull: false
+      },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
       updatedAt: {
         type: Sequelize.DATE,
