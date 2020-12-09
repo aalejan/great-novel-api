@@ -61,6 +61,27 @@ module.exports = {
     })
   },
 
+  module.exports = {
+    up: async (queryInterface, Sequelize) => {
+      /**
+       * Add altering commands here.
+       *
+       * Example:
+       * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+       */
+      return queryInterface.createTable('novelsGenres', {
+        genreId: { type: Sequelize.INTEGER, primaryKey: true, references: { model: Genres, key: 'id' } },
+        novelId: { type: Sequelize.INTEGER, primaryKey: true, references: { model: Novels, key: 'id' } },
+        createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
+        updatedAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
+        },
+        deletedAt: { type: Sequelize.DATE },
+      })
+  
+    },
+
   down: async (queryInterface, Sequelize) => {
     /**
      * Add reverting commands here.
@@ -93,4 +114,14 @@ module.exports = {
     return queryInterface.dropTable('novels')
 
   },
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
+    return queryInterface.dropTable('novelsGenres')
+
+  }
 };
