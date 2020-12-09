@@ -18,7 +18,6 @@ module.exports = {
       },
       deletedAt: { type: Sequelize.DATE },
     })
-
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -28,7 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    return queryInterface.dropTable('candies')
-
+    return queryInterface.dropTable('genres')
   }
 };
