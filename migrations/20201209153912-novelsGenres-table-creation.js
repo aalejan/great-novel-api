@@ -13,10 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: {
-            tableName: 'genres',
-            schema: 'schema'
-          },
+          model: 'genres',
           key: 'id'
         },
         allowNull: false
@@ -25,10 +22,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: {
-            tableName: 'authors',
-            schema: 'schema'
-          },
+          model: 'novels',
           key: 'id'
         },
         allowNull: false
