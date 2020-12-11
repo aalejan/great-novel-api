@@ -6,6 +6,21 @@ const getAllAuthors = async (req, res) => {
   return res.send(authors)
 }
 
+const getAuthorByName = async (req, res) => {
+  const { name } = req.params
+
+  const author = await models.Authors.findOne({
+    where: {
+      name: { [models.Op.like]: `%${name}%` }
+    }
+  })
+
+  return author
+    ? res.send(author)
+    : res.sendStatus(404)
+}
+
+
 const getAuthorById = async (req, res) => {
   const { id } = req.params
 
@@ -22,4 +37,4 @@ const getAuthorById = async (req, res) => {
     : res.send(404)
 }
 
-module.exports = { getAllAuthors, getAuthorById }
+module.exports = { getAllAuthors, getAuthorById, getAuthorByName }

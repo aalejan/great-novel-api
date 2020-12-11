@@ -1,25 +1,26 @@
 const models = require('../models')
 
 const getAllGenres = async (req, res) => {
-    const genres = await models.Genres.findAll()
+  const genres = await models.Genres.findAll()
 
-    res.send(genres)
+  res.send(genres)
 }
 
 const getGenreById = async (req, res) => {
-    const {id} = req.params
+  const { id } = req.params
 
-    const genre = await models.Genres.findOne({
-        where:{id},
-        include: [{
-            model: models.Novels,
-            include: [{model: models.Authors}],
-        }]
-    })
-    return genre
-    ?res.send(genre)
-    :res.sendStatus(404)
+  const genre = await models.Genres.findOne({
+    where: { id },
+    include: [{
+      model: models.Novels,
+      include: [{ model: models.Authors }],
+    }]
+  })
+
+  return genre
+    ? res.send(genre)
+    : res.sendStatus(404)
 }
 
 
-module.exports = {getAllGenres, getGenreById}
+module.exports = { getAllGenres, getGenreById }
