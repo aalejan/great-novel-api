@@ -12,7 +12,11 @@ const getAuthorByName = async (req, res) => {
   const author = await models.Authors.findOne({
     where: {
       name: { [models.Op.like]: `%${name}%` }
-    }
+    },
+    include: [{
+      model: models.Novels,
+      include: [{ model: models.Genres }],
+    }]
   })
 
   return author
