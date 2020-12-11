@@ -10,6 +10,24 @@ const getAllNovels = async (req, res) => {
   return res.send(novels)
 }
 
+const getNovelByTitle = async (req, res) => {
+  const { title } = req.params
+
+  const novel = await models.Novels.findOne({
+    where: {
+      title: { [models.Op.like]: `%${title}%` }
+    },
+    include: [
+      { model: models.Authors },
+      { model: models.Genres },
+    ]
+  })
+
+  return novel
+    ? res.send(novel)
+    : res.sendStatus(404)
+}
+
 const getNovelById = async (req, res) => {
   const { id } = req.params
 
@@ -28,4 +46,4 @@ const getNovelById = async (req, res) => {
 
 
 
-module.exports = { getAllNovels, getNovelById }
+module.exports = { getAllNovels, getNovelById, getNovelByTitle }
