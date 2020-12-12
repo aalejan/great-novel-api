@@ -10,7 +10,7 @@ const getAllNovels = async (req, res) => {
   return res.send(novels)
 }
 
-const getNovelByTitle = async (req, res) => {
+const getNovelByTitle = async (req, res, next) => {
   const { title } = req.params
 
   const novel = await models.Novels.findOne({
@@ -25,7 +25,7 @@ const getNovelByTitle = async (req, res) => {
 
   return novel
     ? res.send(novel)
-    : res.sendStatus(404)
+    : next()
 }
 
 const getNovelById = async (req, res) => {
