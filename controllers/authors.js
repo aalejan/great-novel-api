@@ -6,7 +6,7 @@ const getAllAuthors = async (req, res) => {
   return res.send(authors)
 }
 
-const getAuthorByName = async (req, res) => {
+const getAuthorByName = async (req, res, next) => {
   const { name } = req.params
 
   const author = await models.Authors.findOne({
@@ -21,7 +21,7 @@ const getAuthorByName = async (req, res) => {
 
   return author
     ? res.send(author)
-    : res.sendStatus(404)
+    : next()
 }
 
 
